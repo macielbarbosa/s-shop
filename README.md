@@ -2,7 +2,7 @@
 
 Loja virtual com carrinho de compras.
 
-##### Rodar o projeto
+##### Rodar o projeto (sem build)
 
 ```
 > npm start
