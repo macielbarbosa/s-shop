@@ -3,11 +3,8 @@ import classnames from 'classnames'
 import { makeStyles } from '@material-ui/core/styles'
 import Breadcrumbs from '@material-ui/core/Breadcrumbs'
 import Typography from '@material-ui/core/Typography'
-import { Close } from '@material-ui/icons'
-import { Button } from '@material-ui/core'
 
 import { Page } from '.'
-import { ProdutoForm } from './ProdutoForm'
 import { useContext } from '../context'
 import { Paginacao } from './Paginacao'
 
