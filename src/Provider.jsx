@@ -9,9 +9,11 @@ class ProviderComponent extends Component {
     super(props)
     const cesta = localStorage.getItem('cesta')
     const produtos = localStorage.getItem('produtos')
+    const compras = localStorage.getItem('compras')
     this.state = {
       produtos: produtos || [],
       cesta: cesta || [],
+      compras: compras || [],
       modoCliente: true,
     }
   }
@@ -62,6 +64,17 @@ class ProviderComponent extends Component {
     this.setLista('cesta', cesta)
   }
 
+  finalizar = (nome) => {
+    const { compras, cesta } = this.state
+    const compra = {
+      nome,
+      quantidade: cesta.length,
+      total: cesta.reduce((total, produto) => total + Number(produto.preco) * produto.quantidade, 0),
+    }
+    this.setLista('compras', [...compras, compra])
+    this.setLista('cesta', [])
+  }
+
   toggleModo = () => {
     const { modoCliente } = this.state
     this.props.history.push(modoCliente ? 'produtos' : '/')
@@ -81,6 +94,7 @@ class ProviderComponent extends Component {
           adicionarProduto: this.adicionarProduto,
           removerProduto: this.removerProduto,
           toggleModo: this.toggleModo,
+          finalizar: this.finalizar,
         }}
       >
         {this.props.children}
