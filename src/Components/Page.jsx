@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import Badge from '@material-ui/core/Badge'
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -39,7 +40,7 @@ const useStyles = makeStyles(() => ({
 export const Page = ({ children }) => {
   const classes = useStyles()
   const history = useHistory()
-  const { modoCliente, toggleModo } = useContext()
+  const { modoCliente, toggleModo, cesta } = useContext()
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -62,6 +63,7 @@ export const Page = ({ children }) => {
                 </ListItem>
                 <ListItem button onClick={() => history.push('/cesta')}>
                   <ListItemText primary="Cesta" />
+                  <Badge badgeContent={cesta.length} color="primary"></Badge>
                 </ListItem>
               </Fragment>
             ) : (
