@@ -12,19 +12,16 @@ import { useHistory } from 'react-router'
 
 const useStyles = makeStyles(() => ({
   root: {
-    '& .MuiToolbar-regular': {
-      minHeight: 50,
-    },
+    maxWidth: 1200,
+    margin: '0 auto',
+    border: '1px solid lightgray',
   },
   body: {
     display: 'flex',
   },
   content: {
     width: '100%',
-    padding: '20px 40px',
-  },
-  buttonModo: {
-    fontSize: 10,
+    padding: '30px 40px',
   },
   title: {
     flexGrow: 1,
@@ -50,7 +47,7 @@ export const Page = ({ children }) => {
           <Typography variant="h6" className={classes.title}>
             S-Shop
           </Typography>
-          <Button color="secondary" variant="contained" onClick={toggleModo} className={classes.buttonModo}>
+          <Button color="secondary" variant="contained" onClick={toggleModo}>
             {modoCliente ? 'Cliente' : 'Admin'}
           </Button>
         </Toolbar>
