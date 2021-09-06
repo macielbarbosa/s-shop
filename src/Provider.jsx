@@ -82,10 +82,11 @@ class ProviderComponent extends Component {
   }
 
   render() {
-    const { cesta, modoCliente, produtos } = this.state
+    const { cesta, modoCliente, produtos, compras } = this.state
     return (
       <Context.Provider
         value={{
+          compras,
           produtos,
           cesta,
           modoCliente,
