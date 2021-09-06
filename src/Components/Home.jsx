@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Breadcrumbs from '@material-ui/core/Breadcrumbs'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import { Close } from '@material-ui/icons'
 import { Button } from '@material-ui/core'
 
 import { Page } from '.'
@@ -59,7 +58,7 @@ const useStyles = makeStyles(() => ({
 
 export const Home = () => {
   const classes = useStyles()
-  const { produtos, removerProduto } = useContext()
+  const { produtos } = useContext()
   const [paginacao, setPaginacao] = useState([0, 10])
   const [busca, setBusca] = useState('')
   const [pagina, setPagina] = useState(1)

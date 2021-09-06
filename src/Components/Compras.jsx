@@ -63,7 +63,7 @@ export const Compras = () => {
       <div className={classes.root}>
         <Breadcrumbs separator="›">
           <Typography color="textPrimary">Admin</Typography>
-          <Typography>Produtos</Typography>
+          <Typography>Compras</Typography>
         </Breadcrumbs>
         <div className={classnames(classes.row, classes.listHeader)}>
           <div>Nome</div>
