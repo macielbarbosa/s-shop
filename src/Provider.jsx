@@ -8,15 +8,36 @@ class ProviderComponent extends Component {
   constructor(props) {
     super(props)
     const cesta = localStorage.getItem('cesta')
+    const produtos = localStorage.getItem('produtos')
     this.state = {
-      cesta: cesta ? cesta : [],
+      produtos: produtos || [],
+      cesta: cesta || [],
       modoCliente: true,
     }
   }
 
-  setCesta = (cesta) => {
-    localStorage.setItem('cesta', cesta)
-    this.setState({ cesta })
+  setLista = (nome, itens) => {
+    localStorage.setItem(nome, itens)
+    this.setState({ [nome]: itens })
+  }
+
+  adicionarProduto = (produto) => {
+    const { produtos } = this.state
+    const jaExiste = produtos.some(({ nome }) => nome === produto.nome)
+    if (jaExiste) {
+      alert('O produto já existe.')
+    } else {
+      this.setLista('produtos', [...produtos, produto])
+    }
+  }
+
+  removerProduto = (nome) => {
+    const { produtos } = this.state
+    const index = produtos.findIndex((produto) => produto.nome === nome)
+    const naoExiste = index === -1
+    if (naoExiste) return
+    produtos.splice(index, 1)
+    this.setLista('produtos', produtos)
   }
 
   adicionarCesta = (produto) => {
@@ -26,17 +47,19 @@ class ProviderComponent extends Component {
     if (produtoEstaNaCesta) {
       const produtoCesta = cesta[indexProdutoCesta]
       produtoCesta.quantidade += produto.quantidade
-      this.setCesta(cesta)
+      this.setLista('cesta', cesta)
     } else {
-      this.setCesta({ cesta: [...this.state.cesta, produto] })
+      this.setLista('cesta', [...this.state.cesta, produto])
     }
   }
 
   removerCesta = (nome) => {
     const { cesta } = this.state
     const index = cesta.findIndex((produto) => produto.nome === nome)
+    const naoExiste = index === -1
+    if (naoExiste) return
     cesta.splice(index, 1)
-    this.setCart(cesta)
+    this.setLista('cesta', cesta)
   }
 
   toggleModo = () => {
@@ -46,14 +69,17 @@ class ProviderComponent extends Component {
   }
 
   render() {
-    const { cesta, modoCliente } = this.state
+    const { cesta, modoCliente, produtos } = this.state
     return (
       <Context.Provider
         value={{
+          produtos,
           cesta,
           modoCliente,
           adicionarCesta: this.adicionarCesta,
           removerCesta: this.removerCesta,
+          adicionarProduto: this.adicionarProduto,
+          removerProduto: this.removerProduto,
           toggleModo: this.toggleModo,
         }}
       >
